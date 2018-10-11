@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>Ma page</title>
+</head>
+<body>
+	<h1>Hello</h1>
+	<form method="post" action="/HelloWorldServlet/bean.jsp">
+		First name: <input type="text" name="firstname"> <br>
+		Last name: <input type="text" name="lastname"> <br>
+		Birth date: <input type="date" name="birthdate"> <br>
+		<div>
+			<input type="radio" id="male" name="sex" value="male" checked />
+		        <label for="male">Male</label>
+		</div>
+		<div>
+			<input type="radio" id="female" name="sex" value="female" checked />
+		        <label for="female">Female</label>
+		</div>
+		<input type="submit" value="envoyer">
+	</form>
+	
+	<a href="/HelloWorldServlet/ReadCookie">ReadCookie</a>
+	<a href="/HelloWorldServlet/ShowSession">ShowSession</a>
+</body>
+</html>

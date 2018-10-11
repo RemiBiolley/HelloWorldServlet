@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Ma page</title>
+</head>
+<body>
+	<h1>Hello</h1>
+	<form method="post" action="/HelloWorldServlet/Form_Servlet">
+		First name: <input type="text" name="firstname"> <br>
+		Last name: <input type="text" name="lastname"> <br>
+		Birth date: <input type="date" name="birthdate"> (La date doit être de la forme "YYYY-MM-DD")<br>
+		<div>
+			<input type="radio" id="male" name="sex" value="male" checked />
+		        <label for="male">Male</label>
+		</div>
+		<div>
+			<input type="radio" id="female" name="sex" value="female" checked />
+		        <label for="female">Female</label>
+		</div>
+		<input type="submit" value="envoyer">
+	</form>
+	
+	<a href="/HelloWorldServlet/ReadCookie">Clique ici pour obtenir tes informations depuis les cookies</a> <br>
+	<a href="/HelloWorldServlet/ShowSession">Ici la session te dit ton nombre de visites</a> <br>
+	<a href="/HelloWorldServlet/countWithCookies">Ici les cookies te disent ton nombre de visites</a> <br>
+</body>
+</html>
