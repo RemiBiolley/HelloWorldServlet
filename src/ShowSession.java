@@ -73,17 +73,19 @@ public class ShowSession extends HttpServlet {
 					lastname = cookies[i].getValue();
 				}
 				else if(Objects.equals(cookies[i].getName(), "Date_de_naissance") && cookies[i].getName().length() >= 10) {
-					birthdate= "2018-" + cookies[i].getValue().substring(5);
+					birthdate= cookies[i].getValue();
 				}
 				
 			}
 			try {
 				Date birth = myFormat.parse(birthdate);
 				Date today = myFormat.parse(myFormat.format(new Date()));
-				System.out.println(birth);
-				System.out.println(today);
 				long diff = today.getTime() - birth.getTime();
-				daysToBirth=365 - TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+				System.out.println(diff);
+				daysToBirth=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+				if(daysToBirth>365) {
+					daysToBirth= daysToBirth%365;
+				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
