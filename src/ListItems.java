@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,24 +34,38 @@ public class ListItems extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		HttpSession s = request.getSession(true);
-		String newItem = request.getParameter("newItem");
+		String[] newItem = {request.getParameter("newItem"), "0"};
+		int occurences = 0;
+		ArrayList <String[]> passedItems = new ArrayList<String[]>();
+		
+		out.println("<HTML>");
+		out.println("<HEAD><TITLE>Lab1</TITLE></HEAD>");
+		out.println("<BODY>");
 		
 		if(s.isNew()) {
-			ArrayList<String> passedItems = new ArrayList<String>();
 			passedItems.add(newItem);
 			s.setAttribute("passedItems", passedItems);
 		}
 		else {
-			ArrayList<String> passedItems = (ArrayList<String>)s.getAttribute("passedItems");
-			passedItems.add(newItem);
+			passedItems = (ArrayList<String[]>)s.getAttribute("passedItems");
+			for(int i=0 ; i<passedItems.size() ; i++) {
+				if(Objects.equals(newItem[0], passedItems.get(i)[0])){
+					occurences =Integer.parseInt(passedItems.get(i)[1]) + 1;
+					passedItems.get(i)[1] = "" + occurences;
+					break;
+				}
+			}
+			if(occurences==0) {
+				passedItems.add(newItem);
+			}
 			s.setAttribute("passedItems", passedItems);
 		}
 		
-		ArrayList<String>passedItems = (ArrayList<String>)s.getAttribute("passedItems");
-		
 		for(int i=0 ; i<passedItems.size() ; i++) {
-			out.println(passedItems.get(i));
+			out.println(passedItems.get(i)[0] + " ( x" + passedItems.get(i)[1] + " ) <br>");
 		}
+		out.println("</BODY>");
+		out.println("</HTML>");
 		out.close();
 		
 	}
